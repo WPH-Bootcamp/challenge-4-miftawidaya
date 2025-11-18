@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:student": "node __tests__/Student.test.js"
+    "test:student": "node __tests__/Student.test.js",
+    "test:manager": "node __tests__/StudentManager.test.js",
+    "test:all": "npm run test:student && npm run test:manager"
   },
   "keywords": [
     "student",

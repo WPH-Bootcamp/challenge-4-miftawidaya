@@ -1,7 +1,7 @@
 /**
  * Class StudentManager
  * Mengelola koleksi siswa dan operasi-operasi terkait
- * 
+ *
  * TODO: Implementasikan class StudentManager dengan:
  * - Constructor untuk inisialisasi array students
  * - Method addStudent(student) untuk menambah siswa
@@ -17,9 +17,20 @@ class StudentManager {
   // TODO: Implementasikan constructor
   // Properti yang dibutuhkan:
   // - students: Array untuk menyimpan semua siswa
-  
+
+  #students;
+
   constructor() {
-    // Implementasi constructor di sini
+    this.#students = [];
+  }
+
+  /**
+   * Menyediakan akses read-only terhadap daftar siswa.
+   * Mengembalikan salinan beku agar pihak luar tidak bisa memodifikasi
+   * koleksi internal secara langsung.
+   */
+  get students() {
+    return Object.freeze([...this.#students]);
   }
 
   /**
