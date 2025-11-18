@@ -363,4 +363,67 @@ runner.test('Status Lulus tepat di batas 75', () => {
   runner.assertEqual(student.getGradeStatus(), 'Lulus', 'Batas 75 tetap lulus');
 });
 
+console.log('\n' + '='.repeat(50));
+console.log('TES STUDENT - METHOD displayInfo');
+console.log('='.repeat(50) + '\n');
+
+console.log('\n--- Kategori 12: displayInfo Output ---\n');
+
+runner.test('displayInfo tanpa nilai', () => {
+  const student = new Student('S001', 'Budi Santoso', '10A');
+
+  const logs = [];
+  const originalLog = console.log;
+  console.log = (msg) => logs.push(String(msg));
+
+  student.displayInfo();
+
+  console.log = originalLog;
+
+  runner.assertArrayContains(logs, 'ID: S001', 'ID tercetak');
+  runner.assertArrayContains(logs, 'Nama: Budi Santoso', 'Nama tercetak');
+  runner.assertArrayContains(logs, 'Kelas: 10A', 'Kelas tercetak');
+  runner.assertArrayContains(logs, 'Mata Pelajaran:', 'Header mapel tercetak');
+  runner.assertArrayContains(
+    logs,
+    '  (Belum ada nilai)',
+    'Pesan belum ada nilai'
+  );
+  runner.assertArrayContains(
+    logs,
+    'Rata-rata: 0.00',
+    'Rata-rata 0.00 tercetak'
+  );
+  runner.assertArrayContains(
+    logs,
+    'Status: Belum Ada Nilai',
+    'Status belum ada nilai tercetak'
+  );
+});
+
+runner.test('displayInfo dengan nilai', () => {
+  const student = new Student('S001', 'Budi Santoso', '10A');
+
+  student.addGrade('Matematika', 80);
+  student.addGrade('IPA', 90);
+
+  const logs = [];
+  const originalLog = console.log;
+  console.log = (msg) => logs.push(String(msg));
+
+  student.displayInfo();
+
+  console.log = originalLog;
+
+  runner.assertArrayContains(logs, 'ID: S001');
+  runner.assertArrayContains(logs, 'Nama: Budi Santoso');
+  runner.assertArrayContains(logs, 'Kelas: 10A');
+  runner.assertArrayContains(logs, 'Mata Pelajaran:');
+  runner.assertArrayContains(logs, '  - Matematika: 80');
+  runner.assertArrayContains(logs, '  - IPA: 90');
+  runner.assertArrayContains(logs, 'Rata-rata: 85.00');
+  runner.assertArrayContains(logs, 'Status: Lulus');
+  runner.assertArrayContains(logs, '------------------------');
+});
+
 runner.summary();

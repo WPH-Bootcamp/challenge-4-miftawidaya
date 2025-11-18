@@ -100,7 +100,23 @@ class Student {
    * TODO: Tampilkan ID, Nama, Kelas, semua nilai, rata-rata, dan status
    */
   displayInfo() {
-    // Implementasi method di sini
+    console.log(`ID: ${this.id}`);
+    console.log(`Nama: ${this.name}`);
+    console.log(`Kelas: ${this.class}`);
+    console.log('Mata Pelajaran:');
+
+    const entries = Object.entries(this.grades);
+    if (entries.length === 0) {
+      console.log('  (Belum ada nilai)');
+    } else {
+      for (const [subject, score] of entries) {
+        console.log(`  - ${subject}: ${score}`);
+      }
+    }
+
+    console.log(`Rata-rata: ${this.getAverage().toFixed(2)}`);
+    console.log(`Status: ${this.getGradeStatus()}`);
+    console.log('------------------------');
   }
 }
 
