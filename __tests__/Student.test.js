@@ -289,4 +289,35 @@ runner.test('Gagal saat nilai di luar 0-100', () => {
   );
 });
 
+console.log('\n' + '='.repeat(50));
+console.log('TES STUDENT - METHOD getAverage');
+console.log('='.repeat(50) + '\n');
+
+console.log('\n--- Kategori 10: getAverage Perhitungan ---\n');
+
+runner.test('Rata-rata 0 saat belum ada nilai', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  runner.assertEqual(student.getAverage(), 0, 'Tanpa nilai, rata-rata 0');
+});
+
+runner.test('Rata-rata dengan satu nilai', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  student.addGrade('Matematika', 88);
+
+  runner.assertEqual(student.getAverage(), 88, 'Rata-rata satu nilai sama');
+});
+
+runner.test('Rata-rata beberapa nilai dibulatkan 2 desimal', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  student.addGrade('Matematika', 80);
+  student.addGrade('IPA', 81);
+  student.addGrade('Bahasa Indonesia', 82);
+  student.addGrade('Bahasa Inggris', 83); // (80+81+82+83)/4 = 81.5
+
+  runner.assertEqual(student.getAverage(), 81.5, 'Rata-rata 81.5');
+});
+
 runner.summary();

@@ -73,7 +73,11 @@ class Student {
    * TODO: Hitung total nilai dibagi jumlah mata pelajaran
    */
   getAverage() {
-    // Implementasi method di sini
+    const gradeValues = Object.values(this.grades);
+    if (gradeValues.length === 0) return 0;
+
+    const total = gradeValues.reduce((sum, grade) => sum + grade, 0);
+    return Math.round((total / gradeValues.length) * 100) / 100;
   }
 
   /**
