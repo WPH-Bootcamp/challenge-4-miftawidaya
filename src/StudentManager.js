@@ -25,6 +25,29 @@ class StudentManager {
   }
 
   /**
+   * Normalisasi nilai string umum (id, nama, kelas, dsb).
+   * Selalu mengembalikan string trim (bisa kosong).
+   * @param {*} value
+   * @returns {string}
+   */
+  #normalizeText(value) {
+    if (value === undefined || value === null) {
+      return '';
+    }
+
+    return String(value).trim();
+  }
+
+  /**
+   * Normalisasi ID siswa untuk konsistensi pencarian.
+   * @param {*} id
+   * @returns {string}
+   */
+  #normalizeId(id) {
+    return this.#normalizeText(id);
+  }
+
+  /**
    * Menyediakan akses read-only terhadap daftar siswa.
    * Mengembalikan salinan beku agar pihak luar tidak bisa memodifikasi
    * koleksi internal secara langsung.
@@ -40,7 +63,34 @@ class StudentManager {
    * TODO: Validasi bahwa ID belum digunakan
    */
   addStudent(student) {
-    // Implementasi method di sini
+    if (!student) {
+      console.error('Student object is required');
+      return false;
+    }
+
+    // Validation: Check if student has an ID
+    if (!student.id) {
+      console.error('Student must have an ID');
+      return false;
+    }
+
+    // Business Rule: Check for duplicate ID
+    const normalizedId = this.#normalizeId(student.id);
+    if (!normalizedId) {
+      console.error('Student must have a valid ID');
+      return false;
+    }
+
+    const existingStudent = this.findStudent(normalizedId);
+
+    if (existingStudent) {
+      // Duplicate ID found - business rule violation
+      return false;
+    }
+
+    // Add student to collection
+    this.#students.push(student);
+    return true;
   }
 
   /**
@@ -50,7 +100,25 @@ class StudentManager {
    * TODO: Cari dan hapus siswa dari array
    */
   removeStudent(id) {
-    // Implementasi method di sini
+    if (!id) {
+      return false;
+    }
+
+    // Store initial length to detect if removal occurred
+    const normalizedId = this.#normalizeId(id);
+    if (!normalizedId) {
+      return false;
+    }
+
+    const initialLength = this.#students.length;
+
+    // Filter out the student with matching ID
+    this.#students = this.#students.filter(
+      (student) => student.id !== normalizedId
+    );
+
+    // Return true if array length changed (student was removed)
+    return this.#students.length < initialLength;
   }
 
   /**
@@ -60,7 +128,21 @@ class StudentManager {
    * TODO: Gunakan method array untuk mencari siswa
    */
   findStudent(id) {
-    // Implementasi method di sini
+    if (!id) {
+      return null;
+    }
+
+    // Normalize ID for comparison (trim whitespace)
+    const normalizedId = this.#normalizeId(id);
+    if (!normalizedId) {
+      return null;
+    }
+
+    // Find student with matching ID
+    const student = this.#students.find((s) => s.id === normalizedId);
+
+    // Return student or null if not found
+    return student || null;
   }
 
   /**
