@@ -9,6 +9,9 @@ import TestRunner from './utils/TestRunner.js';
 
 const runner = new TestRunner();
 
+// --------------------------------------------------
+// TES STUDENT - KONSTRUKTOR
+// --------------------------------------------------
 console.log('\n' + '='.repeat(50));
 console.log('TES STUDENT - KONSTRUKTOR');
 console.log('='.repeat(50) + '\n');
@@ -175,6 +178,9 @@ runner.test('Nilai objek biasa', () => {
   );
 });
 
+// --------------------------------------------------
+// TES STUDENT - METHOD addGrade
+// --------------------------------------------------
 console.log('\n' + '='.repeat(50));
 console.log('TES STUDENT - METHOD addGrade');
 console.log('='.repeat(50) + '\n');
@@ -289,6 +295,9 @@ runner.test('Gagal saat nilai di luar 0-100', () => {
   );
 });
 
+// --------------------------------------------------
+// TES STUDENT - METHOD getAverage
+// --------------------------------------------------
 console.log('\n' + '='.repeat(50));
 console.log('TES STUDENT - METHOD getAverage');
 console.log('='.repeat(50) + '\n');
@@ -363,6 +372,9 @@ runner.test('Status Lulus tepat di batas 75', () => {
   runner.assertEqual(student.getGradeStatus(), 'Lulus', 'Batas 75 tetap lulus');
 });
 
+// --------------------------------------------------
+// TES STUDENT - METHOD displayInfo
+// --------------------------------------------------
 console.log('\n' + '='.repeat(50));
 console.log('TES STUDENT - METHOD displayInfo');
 console.log('='.repeat(50) + '\n');
