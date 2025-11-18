@@ -175,4 +175,118 @@ runner.test('Nilai objek biasa', () => {
   );
 });
 
+console.log('\n' + '='.repeat(50));
+console.log('TES STUDENT - METHOD addGrade');
+console.log('='.repeat(50) + '\n');
+
+console.log('\n--- Kategori 7: addGrade Nilai Valid ---\n');
+
+runner.test('Tambah satu nilai mata pelajaran', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  student.addGrade('Matematika', 90);
+
+  runner.assertEqual(
+    student.grades.Matematika,
+    90,
+    'Nilai Matematika disimpan dengan benar'
+  );
+});
+
+runner.test('Tambah beberapa mata pelajaran', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  student.addGrade('Matematika', 80);
+  student.addGrade('IPA', 85);
+  student.addGrade('Bahasa Indonesia', 90);
+
+  runner.assertEqual(Object.keys(student.grades).length, 3, 'Ada 3 mapel');
+  runner.assertEqual(student.grades.Matematika, 80);
+  runner.assertEqual(student.grades.IPA, 85);
+  runner.assertEqual(student.grades['Bahasa Indonesia'], 90);
+});
+
+runner.test('Update nilai mata pelajaran yang sama', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  student.addGrade('Matematika', 70);
+  student.addGrade('Matematika', 95);
+
+  runner.assertEqual(
+    student.grades.Matematika,
+    95,
+    'Nilai terakhir yang dipakai'
+  );
+});
+
+console.log('\n--- Kategori 8: addGrade Validasi Subject ---\n');
+
+runner.test('Gagal saat nama mata pelajaran kosong', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  runner.assertThrows(
+    () => student.addGrade('', 80),
+    'Nama mata pelajaran tidak boleh kosong'
+  );
+});
+
+runner.test('Gagal saat nama mata pelajaran hanya spasi', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  runner.assertThrows(
+    () => student.addGrade('   ', 80),
+    'Nama mata pelajaran tidak boleh kosong'
+  );
+});
+
+runner.test('Gagal saat nama mata pelajaran null/undefined', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  runner.assertThrows(
+    () => student.addGrade(null, 80),
+    'Nama mata pelajaran tidak boleh kosong'
+  );
+  runner.assertThrows(
+    () => student.addGrade(undefined, 80),
+    'Nama mata pelajaran tidak boleh kosong'
+  );
+});
+
+console.log('\n--- Kategori 9: addGrade Validasi Nilai ---\n');
+
+runner.test('Gagal saat nilai bukan angka', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  runner.assertThrows(
+    () => student.addGrade('Matematika', '90'),
+    'Nilai harus berupa angka'
+  );
+});
+
+runner.test('Gagal saat nilai NaN atau Infinity', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  runner.assertThrows(
+    () => student.addGrade('Matematika', Number.NaN),
+    'Nilai tidak valid'
+  );
+  runner.assertThrows(
+    () => student.addGrade('Matematika', Infinity),
+    'Nilai tidak valid'
+  );
+});
+
+runner.test('Gagal saat nilai di luar 0-100', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  runner.assertThrows(
+    () => student.addGrade('Matematika', -10),
+    'Nilai harus antara 0-100'
+  );
+  runner.assertThrows(
+    () => student.addGrade('Matematika', 120),
+    'Nilai harus antara 0-100'
+  );
+});
+
 runner.summary();
