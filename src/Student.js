@@ -46,7 +46,25 @@ class Student {
    * TODO: Validasi bahwa score harus antara 0-100
    */
   addGrade(subject, score) {
-    // Implementasi method di sini
+    // Validate subject
+    const trimmedSubject = (subject || '').trim();
+
+    if (!trimmedSubject)
+      throw new Error('Nama mata pelajaran tidak boleh kosong');
+
+    // Type validation
+    if (typeof score !== 'number')
+      throw new TypeError('Nilai harus berupa angka');
+
+    // Special number validation
+    if (Number.isNaN(score) || !Number.isFinite(score))
+      throw new TypeError('Nilai tidak valid');
+
+    // Business invariant: scores are 0-100
+    if (score < 0 || score > 100) throw new Error('Nilai harus antara 0-100');
+
+    // Guaranteed valid: assign
+    this.grades[trimmedSubject] = score;
   }
 
   /**
