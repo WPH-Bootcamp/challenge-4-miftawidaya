@@ -20,6 +20,8 @@ class Student {
   // - class: Kelas siswa
   // - grades: Object untuk menyimpan nilai {subject: score}
 
+  static PASSING_SCORE = 75;
+
   constructor(id, name, studentClass) {
     // Normalize input: Convert to string and trim whitespace
     // Handles: numbers, whitespace, null/undefined
@@ -86,7 +88,11 @@ class Student {
    * TODO: Return "Lulus" jika rata-rata >= 75, selain itu "Tidak Lulus"
    */
   getGradeStatus() {
-    // Implementasi method di sini
+    if (Object.keys(this.grades).length === 0) {
+      return 'Belum Ada Nilai';
+    }
+
+    return this.getAverage() >= Student.PASSING_SCORE ? 'Lulus' : 'Tidak Lulus';
   }
 
   /**

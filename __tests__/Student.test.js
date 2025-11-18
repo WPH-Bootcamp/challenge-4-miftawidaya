@@ -320,4 +320,47 @@ runner.test('Rata-rata beberapa nilai dibulatkan 2 desimal', () => {
   runner.assertEqual(student.getAverage(), 81.5, 'Rata-rata 81.5');
 });
 
+console.log('\n--- Kategori 11: getGradeStatus Status Kelulusan ---\n');
+
+runner.test('Status belum ada nilai', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  runner.assertEqual(
+    student.getGradeStatus(),
+    'Belum Ada Nilai',
+    'Tanpa nilai, status khusus'
+  );
+});
+
+runner.test('Status Lulus saat rata-rata >= 75', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  student.addGrade('Matematika', 80);
+  student.addGrade('IPA', 90);
+
+  runner.assertEqual(student.getGradeStatus(), 'Lulus', 'Harus lulus');
+});
+
+runner.test('Status Tidak Lulus saat rata-rata < 75', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  student.addGrade('Matematika', 60);
+  student.addGrade('IPA', 70);
+
+  runner.assertEqual(
+    student.getGradeStatus(),
+    'Tidak Lulus',
+    'Harus tidak lulus'
+  );
+});
+
+runner.test('Status Lulus tepat di batas 75', () => {
+  const student = new Student('S001', 'Budi', '10A');
+
+  student.addGrade('Matematika', 75);
+  student.addGrade('IPA', 75);
+
+  runner.assertEqual(student.getGradeStatus(), 'Lulus', 'Batas 75 tetap lulus');
+});
+
 runner.summary();
