@@ -2,7 +2,7 @@
  * Class StudentManager
  * Mengelola koleksi siswa dan operasi-operasi terkait
  *
- * TODO: Implementasikan class StudentManager dengan:
+ * Implementasikan class StudentManager dengan:
  * - Constructor untuk inisialisasi array students
  * - Method addStudent(student) untuk menambah siswa
  * - Method removeStudent(id) untuk menghapus siswa
@@ -14,7 +14,7 @@
  */
 
 class StudentManager {
-  // TODO: Implementasikan constructor
+  // Implementasikan constructor
   // Properti yang dibutuhkan:
   // - students: Array untuk menyimpan semua siswa
 
@@ -60,7 +60,7 @@ class StudentManager {
    * Menambah siswa baru ke dalam sistem
    * @param {Student} student - Object Student yang akan ditambahkan
    * @returns {boolean} true jika berhasil, false jika ID sudah ada
-   * TODO: Validasi bahwa ID belum digunakan
+   * Validasi bahwa ID belum digunakan
    */
   addStudent(student) {
     if (!student) {
@@ -97,7 +97,7 @@ class StudentManager {
    * Menghapus siswa berdasarkan ID
    * @param {string} id - ID siswa yang akan dihapus
    * @returns {boolean} true jika berhasil, false jika tidak ditemukan
-   * TODO: Cari dan hapus siswa dari array
+   * Cari dan hapus siswa dari array
    */
   removeStudent(id) {
     if (!id) {
@@ -125,7 +125,7 @@ class StudentManager {
    * Mencari siswa berdasarkan ID
    * @param {string} id - ID siswa yang dicari
    * @returns {Student|null} Object Student jika ditemukan, null jika tidak
-   * TODO: Gunakan method array untuk mencari siswa
+   * Gunakan method array untuk mencari siswa
    */
   findStudent(id) {
     if (!id) {
@@ -150,7 +150,7 @@ class StudentManager {
    * @param {string} id - ID siswa yang akan diupdate
    * @param {object} data - Data baru (name, class, dll)
    * @returns {boolean} true jika berhasil, false jika tidak ditemukan
-   * TODO: Cari siswa dan update propertinya
+   * Cari siswa dan update propertinya
    */
   updateStudent(id, data) {
     // Validation: Check parameters
@@ -209,7 +209,7 @@ class StudentManager {
    * Mendapatkan top n siswa berdasarkan rata-rata nilai
    * @param {number} n - Jumlah siswa yang ingin didapatkan
    * @returns {Array} Array berisi top n siswa
-   * TODO: Sort siswa berdasarkan rata-rata (descending) dan ambil n teratas
+   * Sort siswa berdasarkan rata-rata (descending) dan ambil n teratas
    */
   getTopStudents(n) {
     // Validation: n must be positive
@@ -229,7 +229,7 @@ class StudentManager {
 
   /**
    * Menampilkan informasi semua siswa
-   * TODO: Loop semua siswa dan panggil displayInfo() untuk masing-masing
+   * Loop semua siswa dan panggil displayInfo() untuk masing-masing
    */
   displayAllStudents() {
     if (this.#students.length === 0) {

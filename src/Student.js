@@ -2,7 +2,7 @@
  * Class Student
  * Representasi dari seorang siswa dengan data dan nilai-nilainya
  *
- * TODO: Implementasikan class Student dengan:
+ * Implementasikan class Student dengan:
  * - Constructor untuk inisialisasi properti (id, name, class, grades)
  * - Method addGrade(subject, score) untuk menambah nilai mata pelajaran
  * - Method getAverage() untuk menghitung rata-rata nilai
@@ -13,7 +13,7 @@
  */
 
 class Student {
-  // TODO: Implementasikan constructor
+  // Implementasikan constructor
   // Properti yang dibutuhkan:
   // - id: ID unik siswa
   // - name: Nama siswa
@@ -45,7 +45,7 @@ class Student {
    * Menambah atau update nilai mata pelajaran
    * @param {string} subject - Nama mata pelajaran
    * @param {number} score - Nilai (0-100)
-   * TODO: Validasi bahwa score harus antara 0-100
+   * Validasi bahwa score harus antara 0-100
    */
   addGrade(subject, score) {
     // Validate subject
@@ -72,7 +72,7 @@ class Student {
   /**
    * Menghitung rata-rata nilai dari semua mata pelajaran
    * @returns {number} Rata-rata nilai
-   * TODO: Hitung total nilai dibagi jumlah mata pelajaran
+   * Hitung total nilai dibagi jumlah mata pelajaran
    */
   getAverage() {
     const gradeValues = Object.values(this.grades);
@@ -85,7 +85,7 @@ class Student {
   /**
    * Menentukan status kelulusan siswa
    * @returns {string} "Lulus" atau "Tidak Lulus"
-   * TODO: Return "Lulus" jika rata-rata >= 75, selain itu "Tidak Lulus"
+   * Return "Lulus" jika rata-rata >= 75, selain itu "Tidak Lulus"
    */
   getGradeStatus() {
     if (Object.keys(this.grades).length === 0) {
@@ -97,7 +97,7 @@ class Student {
 
   /**
    * Menampilkan informasi lengkap siswa
-   * TODO: Tampilkan ID, Nama, Kelas, semua nilai, rata-rata, dan status
+   * Tampilkan ID, Nama, Kelas, semua nilai, rata-rata, dan status
    */
   displayInfo() {
     console.log(`ID: ${this.id}`);
