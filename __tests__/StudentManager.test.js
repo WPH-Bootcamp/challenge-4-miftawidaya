@@ -448,4 +448,115 @@ runner.test('Ubah hasil tidak memengaruhi data asli', () => {
   runner.assertArrayLength(manager.students, 1, 'Array asli harus tetap 1');
 });
 
+// --------------------------------------------------
+// TES STUDENTMANAGER - METHOD getTopStudents
+// --------------------------------------------------
+console.log('\n' + '='.repeat(50));
+console.log('TES STUDENTMANAGER - METHOD getTopStudents');
+console.log('='.repeat(50) + '\n');
+
+runner.test('Kembalikan siswa dengan rata rata terbaik', () => {
+  const manager = new StudentManager();
+
+  const s1 = new Student('S001', 'Budi', '10A');
+  s1.addGrade('Math', 80);
+
+  const s2 = new Student('S002', 'Ahmad', '10A');
+  s2.addGrade('Math', 90);
+
+  const s3 = new Student('S003', 'Siti', '10A');
+  s3.addGrade('Math', 85);
+
+  manager.addStudent(s1);
+  manager.addStudent(s2);
+  manager.addStudent(s3);
+
+  const top3 = manager.getTopStudents(3);
+
+  runner.assertEqual(top3[0].name, 'Ahmad', 'Pertama Ahmad');
+  runner.assertEqual(top3[1].name, 'Siti', 'Kedua Siti');
+  runner.assertEqual(top3[2].name, 'Budi', 'Ketiga Budi');
+});
+
+runner.test('Saat n lebih besar dari jumlah siswa', () => {
+  const manager = new StudentManager();
+  manager.addStudent(new Student('S001', 'Budi', '10A'));
+  manager.addStudent(new Student('S002', 'Ahmad', '10B'));
+
+  const top10 = manager.getTopStudents(10);
+
+  runner.assertArrayLength(top10, 2, 'Mengembalikan semua siswa');
+});
+
+runner.test('Jika n = 0 kembali array kosong', () => {
+  const manager = new StudentManager();
+  manager.addStudent(new Student('S001', 'Budi', '10A'));
+
+  const top0 = manager.getTopStudents(0);
+
+  runner.assertArrayLength(top0, 0, 'Harus kosong');
+});
+
+runner.test('Jika n negatif kembali array kosong', () => {
+  const manager = new StudentManager();
+  manager.addStudent(new Student('S001', 'Budi', '10A'));
+
+  const topNegative = manager.getTopStudents(-5);
+
+  runner.assertArrayLength(topNegative, 0, 'Harus kosong');
+});
+
+runner.test('Siswa tanpa nilai dianggap 0', () => {
+  const manager = new StudentManager();
+
+  const s1 = new Student('S001', 'Budi', '10A');
+  s1.addGrade('Math', 80);
+
+  const s2 = new Student('S002', 'Ahmad', '10B');
+
+  manager.addStudent(s1);
+  manager.addStudent(s2);
+
+  const top2 = manager.getTopStudents(2);
+
+  runner.assertEqual(top2[0].name, 'Budi', 'Budi duluan');
+  runner.assertEqual(top2[1].name, 'Ahmad', 'Ahmad belakangan');
+});
+
+runner.test('Rata rata sama urutan tetap', () => {
+  const manager = new StudentManager();
+
+  const s1 = new Student('S001', 'Budi', '10A');
+  s1.addGrade('Math', 85);
+
+  const s2 = new Student('S002', 'Ahmad', '10B');
+  s2.addGrade('Math', 85);
+
+  manager.addStudent(s1);
+  manager.addStudent(s2);
+
+  const top2 = manager.getTopStudents(2);
+
+  runner.assertArrayLength(top2, 2, 'Kembalikan dua duanya');
+});
+
+runner.test('Urutan asli tidak berubah setelah sorting', () => {
+  const manager = new StudentManager();
+
+  const s1 = new Student('S001', 'Budi', '10A');
+  s1.addGrade('Math', 70);
+
+  const s2 = new Student('S002', 'Ahmad', '10B');
+  s2.addGrade('Math', 90);
+
+  manager.addStudent(s1);
+  manager.addStudent(s2);
+
+  manager.getTopStudents(2);
+
+  // Original order should be preserved
+  runner.assertEqual(manager.students[0].name, 'Budi', 'Urutan awal tetap');
+  runner.assertEqual(manager.students[1].name, 'Ahmad', 'Urutan awal tetap');
+});
+
 runner.summary();

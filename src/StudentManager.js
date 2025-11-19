@@ -212,7 +212,19 @@ class StudentManager {
    * TODO: Sort siswa berdasarkan rata-rata (descending) dan ambil n teratas
    */
   getTopStudents(n) {
-    // Implementasi method di sini
+    // Validation: n must be positive
+    if (!n || n <= 0) {
+      return [];
+    }
+
+    // Create a copy and sort by average (descending)
+    const sorted = [...this.#students].sort((a, b) => {
+      return b.getAverage() - a.getAverage();
+    });
+
+    // Return top n students
+    // slice() handles case where n > array length
+    return sorted.slice(0, n);
   }
 
   /**
