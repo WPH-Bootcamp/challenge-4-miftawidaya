@@ -285,7 +285,37 @@ class StudentManager {
    * @returns {object} Object berisi statistik (jumlah siswa, rata-rata kelas, dll)
    */
   getClassStatistics(className) {
-    // Implementasi method di sini (BONUS)
+    // Get all students in the class
+    const classStudents = this.getStudentsByClass(className);
+
+    // Check if class has students
+    if (classStudents.length === 0) {
+      return null;
+    }
+
+    // Calculate statistics
+    const averages = classStudents.map((s) => s.getAverage());
+
+    const totalStudents = classStudents.length;
+    const classAverage =
+      averages.reduce((sum, avg) => sum + avg, 0) / totalStudents;
+    const highestAverage = Math.max(...averages);
+    const lowestAverage = Math.min(...averages);
+
+    // Calculate pass rate (students with average >= 75)
+    const passingStudents = classStudents.filter((s) => s.getAverage() >= 75);
+    const passRate = (passingStudents.length / totalStudents) * 100;
+
+    return {
+      className: className,
+      totalStudents: totalStudents,
+      classAverage: Math.round(classAverage * 100) / 100,
+      highestAverage: Math.round(highestAverage * 100) / 100,
+      lowestAverage: Math.round(lowestAverage * 100) / 100,
+      passingStudents: passingStudents.length,
+      failingStudents: totalStudents - passingStudents.length,
+      passRate: Math.round(passRate * 100) / 100,
+    };
   }
 }
 

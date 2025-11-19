@@ -626,4 +626,59 @@ runner.test('Pencarian kelas tidak peka huruf besar', () => {
   runner.assertArrayLength(classUpper, 1, 'Huruf besar jalan');
 });
 
+// --------------------------------------------------
+// TES STUDENTMANAGER - METHOD getClassStatistics
+// --------------------------------------------------
+console.log('\n' + '='.repeat(50));
+console.log('TES STUDENTMANAGER - METHOD getClassStatistics');
+console.log('='.repeat(50) + '\n');
+
+runner.test('Hitung statistik kelas', () => {
+  const manager = new StudentManager();
+
+  const s1 = new Student('S001', 'Budi', '10A');
+  s1.addGrade('Math', 80);
+
+  const s2 = new Student('S002', 'Ahmad', '10A');
+  s2.addGrade('Math', 90);
+
+  manager.addStudent(s1);
+  manager.addStudent(s2);
+
+  const stats = manager.getClassStatistics('10A');
+
+  runner.assertNotNull(stats, 'Stat tidak null');
+  runner.assertEqual(stats.totalStudents, 2, 'Ada 2 siswa');
+  runner.assertEqual(stats.classAverage, 85, 'Rata rata 85');
+  runner.assertEqual(stats.highestAverage, 90, 'Tertinggi 90');
+  runner.assertEqual(stats.lowestAverage, 80, 'Terendah 80');
+});
+
+runner.test('Kelas kosong kembalikan null', () => {
+  const manager = new StudentManager();
+
+  const stats = manager.getClassStatistics('10A');
+
+  runner.assertNull(stats, 'Harus null');
+});
+
+runner.test('Hitung rasio lulus', () => {
+  const manager = new StudentManager();
+
+  const s1 = new Student('S001', 'Budi', '10A');
+  s1.addGrade('Math', 80);
+
+  const s2 = new Student('S002', 'Ahmad', '10A');
+  s2.addGrade('Math', 70);
+
+  manager.addStudent(s1);
+  manager.addStudent(s2);
+
+  const stats = manager.getClassStatistics('10A');
+
+  runner.assertEqual(stats.passingStudents, 1, '1 lulus');
+  runner.assertEqual(stats.failingStudents, 1, '1 tidak lulus');
+  runner.assertEqual(stats.passRate, 50, 'Rasio 50%');
+});
+
 runner.summary();
