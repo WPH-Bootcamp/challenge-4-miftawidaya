@@ -402,4 +402,50 @@ runner.test('Kelas kosong ditolak', () => {
   }
 });
 
+// --------------------------------------------------
+// TES STUDENTMANAGER - METHOD getAllStudents
+// --------------------------------------------------
+console.log('\n' + '='.repeat(50));
+console.log('TES STUDENTMANAGER - METHOD getAllStudents');
+console.log('='.repeat(50) + '\n');
+
+runner.test('Kembalikan array kosong saat belum ada siswa', () => {
+  const manager = new StudentManager();
+
+  const all = manager.getAllStudents();
+
+  runner.assertArrayLength(all, 0, 'Harus kosong');
+});
+
+runner.test('Kembalikan semua siswa yang ada', () => {
+  const manager = new StudentManager();
+  manager.addStudent(new Student('S001', 'Budi', '10A'));
+  manager.addStudent(new Student('S002', 'Ahmad', '10B'));
+
+  const all = manager.getAllStudents();
+
+  runner.assertArrayLength(all, 2, 'Harus 2 siswa');
+});
+
+runner.test('Mengembalikan salinan bukan referensi', () => {
+  const manager = new StudentManager();
+  manager.addStudent(new Student('S001', 'Budi', '10A'));
+
+  const all1 = manager.getAllStudents();
+  const all2 = manager.getAllStudents();
+
+  runner.assertNotEqual(all1, all2, 'Array berbeda');
+  runner.assertTrue(all1 !== manager.students, 'Bukan array internal');
+});
+
+runner.test('Ubah hasil tidak memengaruhi data asli', () => {
+  const manager = new StudentManager();
+  manager.addStudent(new Student('S001', 'Budi', '10A'));
+
+  const all = manager.getAllStudents();
+  all.pop(); // Remove from returned array
+
+  runner.assertArrayLength(manager.students, 1, 'Array asli harus tetap 1');
+});
+
 runner.summary();

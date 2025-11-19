@@ -202,7 +202,7 @@ class StudentManager {
    * @returns {Array} Array berisi semua siswa
    */
   getAllStudents() {
-    // Implementasi method di sini
+    return [...this.#students];
   }
 
   /**
