@@ -559,4 +559,31 @@ runner.test('Urutan asli tidak berubah setelah sorting', () => {
   runner.assertEqual(manager.students[1].name, 'Ahmad', 'Urutan awal tetap');
 });
 
+// --------------------------------------------------
+// TES STUDENTMANAGER - METHOD displayAllStudents
+// --------------------------------------------------
+console.log('\n' + '='.repeat(50));
+console.log('TES STUDENTMANAGER - METHOD displayAllStudents');
+console.log('='.repeat(50) + '\n');
+
+runner.test('Daftar kosong harus aman ditampilkan', () => {
+  const manager = new StudentManager();
+
+  // Should not throw error
+  manager.displayAllStudents();
+
+  runner.assertTrue(true, 'Tidak ada error');
+});
+
+runner.test('Tampil semua siswa tanpa error', () => {
+  const manager = new StudentManager();
+  manager.addStudent(new Student('S001', 'Budi', '10A'));
+  manager.addStudent(new Student('S002', 'Ahmad', '10B'));
+
+  // Should not throw error
+  manager.displayAllStudents();
+
+  runner.assertTrue(true, 'Tidak ada error');
+});
+
 runner.summary();

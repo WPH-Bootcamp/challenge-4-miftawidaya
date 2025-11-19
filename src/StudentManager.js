@@ -232,7 +232,24 @@ class StudentManager {
    * TODO: Loop semua siswa dan panggil displayInfo() untuk masing-masing
    */
   displayAllStudents() {
-    // Implementasi method di sini
+    if (this.#students.length === 0) {
+      console.log('\nBelum ada data siswa dalam sistem.');
+      console.log('Gunakan menu "Tambah Siswa Baru" untuk menambah siswa.\n');
+      return;
+    }
+
+    console.log(
+      `\n=== DAFTAR SEMUA SISWA (${this.#students.length} siswa) ===\n`
+    );
+
+    // Display each student's information
+    let index = 1;
+    for (const student of this.#students) {
+      console.log(`[${index}]`);
+      student.displayInfo();
+      console.log(); // Extra line for readability
+      index += 1;
+    }
   }
 
   /**
