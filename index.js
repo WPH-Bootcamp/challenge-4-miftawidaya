@@ -34,7 +34,9 @@ function displayMenu() {
   console.log('5. Hapus Siswa');
   console.log('6. Tambah Nilai Siswa');
   console.log('7. Lihat Top 3 Siswa');
-  console.log('8. Keluar');
+  console.log('8. Lihat Siswa per Kelas (Bonus)');
+  console.log('9. Statistik Kelas (Bonus)');
+  console.log('0. Keluar');
   console.log('=================================');
 }
 
@@ -303,6 +305,73 @@ function viewTopStudents() {
 }
 
 /**
+ * Handler untuk melihat siswa berdasarkan kelas
+ * - Input nama kelas
+ * - Tampilkan seluruh siswa yang cocok
+ */
+function viewStudentsByClass() {
+  console.log('\n--- Lihat Siswa per Kelas ---');
+
+  const className = readlineSync.question('Masukkan nama kelas: ').trim();
+
+  if (!className) {
+    console.log('\nNama kelas tidak boleh kosong.');
+    return;
+  }
+
+  const students = manager.getStudentsByClass(className);
+
+  if (students.length === 0) {
+    console.log(`\nBelum ada siswa untuk kelas "${className}".`);
+    return;
+  }
+
+  console.log(
+    `\nMenampilkan ${students.length} siswa untuk kelas "${className}":\n`
+  );
+
+  let index = 1;
+  for (const student of students) {
+    console.log(`[${index}]`);
+    student.displayInfo();
+    console.log();
+    index += 1;
+  }
+}
+
+/**
+ * Handler untuk melihat statistik kelas
+ * - Input nama kelas
+ * - Tampilkan informasi agregat kelas (jumlah siswa, rata-rata, dll)
+ */
+function viewClassStatistics() {
+  console.log('\n--- Statistik Kelas ---');
+
+  const className = readlineSync.question('Masukkan nama kelas: ').trim();
+
+  if (!className) {
+    console.log('\nNama kelas tidak boleh kosong.');
+    return;
+  }
+
+  const stats = manager.getClassStatistics(className);
+
+  if (!stats) {
+    console.log(`\nTidak ditemukan data untuk kelas "${className}".`);
+    return;
+  }
+
+  console.log(`\nStatistik kelas "${stats.className}":`);
+  console.log(`  Total Siswa    : ${stats.totalStudents}`);
+  console.log(`  Rata-rata Kelas: ${stats.classAverage.toFixed(2)}`);
+  console.log(`  Nilai Tertinggi: ${stats.highestAverage.toFixed(2)}`);
+  console.log(`  Nilai Terendah : ${stats.lowestAverage.toFixed(2)}`);
+  console.log(`  Lulus          : ${stats.passingStudents}`);
+  console.log(`  Tidak Lulus    : ${stats.failingStudents}`);
+  console.log(`  Persentase Lulus: ${stats.passRate.toFixed(2)}%`);
+}
+
+/**
  * Main program loop
  * - Tampilkan menu
  * - Baca input pilihan
@@ -318,7 +387,7 @@ function main() {
     displayMenu();
 
     // Baca pilihan user
-    const choice = readlineSync.question('\nPilih menu (1-8): ');
+    const choice = readlineSync.question('\nPilih menu (0-9): ');
 
     // Handle pilihan user dengan switch-case
     switch (choice) {
@@ -351,18 +420,26 @@ function main() {
         break;
 
       case '8':
+        viewStudentsByClass();
+        break;
+
+      case '9':
+        viewClassStatistics();
+        break;
+
+      case '0':
         console.log('\nTerima kasih telah menggunakan aplikasi ini!');
         running = false;
         break;
 
       default:
         console.log('\nPilihan tidak valid!');
-        console.log('  Silakan pilih menu 1-8.');
+        console.log('  Silakan pilih menu (0-9)');
         break;
     }
 
     // Pause untuk readability (kecuali exit)
-    if (running && choice !== '8') {
+    if (running && choice !== '0') {
       readlineSync.question('\nTekan Enter untuk kembali...');
     }
   }
