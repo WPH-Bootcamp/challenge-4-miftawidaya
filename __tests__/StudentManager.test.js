@@ -586,4 +586,44 @@ runner.test('Tampil semua siswa tanpa error', () => {
   runner.assertTrue(true, 'Tidak ada error');
 });
 
+// --------------------------------------------------
+// TES STUDENTMANAGER - METHOD getStudentsByClass
+// --------------------------------------------------
+console.log('\n' + '='.repeat(50));
+console.log('TES STUDENTMANAGER - METHOD getStudentsByClass');
+console.log('='.repeat(50) + '\n');
+
+runner.test('Filter kelas tertentu', () => {
+  const manager = new StudentManager();
+  manager.addStudent(new Student('S001', 'Budi', '10A'));
+  manager.addStudent(new Student('S002', 'Ahmad', '10A'));
+  manager.addStudent(new Student('S003', 'Siti', '10B'));
+
+  const class10A = manager.getStudentsByClass('10A');
+
+  runner.assertArrayLength(class10A, 2, 'Ada 2 siswa 10A');
+  runner.assertEqual(class10A[0].class, '10A');
+  runner.assertEqual(class10A[1].class, '10A');
+});
+
+runner.test('Kelas tidak ada hasilnya kosong', () => {
+  const manager = new StudentManager();
+  manager.addStudent(new Student('S001', 'Budi', '10A'));
+
+  const class10B = manager.getStudentsByClass('10B');
+
+  runner.assertArrayLength(class10B, 0, 'Harus kosong');
+});
+
+runner.test('Pencarian kelas tidak peka huruf besar', () => {
+  const manager = new StudentManager();
+  manager.addStudent(new Student('S001', 'Budi', '10A'));
+
+  const classLower = manager.getStudentsByClass('10a');
+  const classUpper = manager.getStudentsByClass('10A');
+
+  runner.assertArrayLength(classLower, 1, 'Huruf kecil jalan');
+  runner.assertArrayLength(classUpper, 1, 'Huruf besar jalan');
+});
+
 runner.summary();

@@ -258,7 +258,25 @@ class StudentManager {
    * @returns {Array} Array siswa dalam kelas tersebut
    */
   getStudentsByClass(className) {
-    // Implementasi method di sini (BONUS)
+    // Validation
+    if (!className) {
+      return [];
+    }
+
+    // Normalize class name for comparison
+    const normalizedClassName = this.#normalizeText(className).toLowerCase();
+    if (!normalizedClassName) {
+      return [];
+    }
+
+    // Filter students by class
+    return this.#students.filter((student) => {
+      if (!student || typeof student.class !== 'string') {
+        return false;
+      }
+
+      return student.class.trim().toLowerCase() === normalizedClassName;
+    });
   }
 
   /**
