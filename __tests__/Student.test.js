@@ -1,7 +1,7 @@
 /**
- * Test Suite for Student Class
+ * Test Suite for Student Manager Class
  *
- * Run with: npm run test:student
+ * Run with: npm run test:manager
  */
 
 import Student from '../src/Student.js';
@@ -10,10 +10,10 @@ import TestRunner from './utils/TestRunner.js';
 const runner = new TestRunner();
 
 // --------------------------------------------------
-// TES STUDENT - KONSTRUKTOR
+// TES STUDENT MANAGER - KONSTRUKTOR
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENT - KONSTRUKTOR');
+console.log('TES STUDENT MANAGER - KONSTRUKTOR');
 console.log('='.repeat(50) + '\n');
 
 console.log('--- Kategori 1: Konstruktor Valid ---\n');
@@ -179,10 +179,10 @@ runner.test('Nilai objek biasa', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENT - METHOD addGrade
+// TES STUDENT MANAGER - METHOD addGrade
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENT - METHOD addGrade');
+console.log('TES STUDENT MANAGER - METHOD addGrade');
 console.log('='.repeat(50) + '\n');
 
 console.log('\n--- Kategori 7: addGrade Nilai Valid ---\n');
@@ -296,10 +296,10 @@ runner.test('Gagal saat nilai di luar 0-100', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENT - METHOD getAverage
+// TES STUDENT MANAGER - METHOD getAverage
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENT - METHOD getAverage');
+console.log('TES STUDENT MANAGER - METHOD getAverage');
 console.log('='.repeat(50) + '\n');
 
 console.log('\n--- Kategori 10: getAverage Perhitungan ---\n');
@@ -373,10 +373,10 @@ runner.test('Status Lulus tepat di batas 75', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENT - METHOD displayInfo
+// TES STUDENT MANAGER - METHOD displayInfo
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENT - METHOD displayInfo');
+console.log('TES STUDENT MANAGER - METHOD displayInfo');
 console.log('='.repeat(50) + '\n');
 
 console.log('\n--- Kategori 12: displayInfo Output ---\n');
