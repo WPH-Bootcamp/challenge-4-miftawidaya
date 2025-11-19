@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
+    "start:enhanced": "node index-enhanced.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:student": "node __tests__/Student.test.js",
     "test:manager": "node __tests__/StudentManager.test.js",
@@ -20,6 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "readline-sync": "^1.4.10"
+    "readline-sync": "^1.4.10",
+    "chalk": "^5.3.0"
   }
 }
