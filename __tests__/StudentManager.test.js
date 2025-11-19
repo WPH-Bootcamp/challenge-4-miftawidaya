@@ -1,7 +1,7 @@
 /**
- * Test Suite for Student Class
+ * Test Suite for StudentManager Class
  *
- * Run with: npm run test:student
+ * Run with: npm run test:manager
  */
 
 import Student from '../src/Student.js';
@@ -11,10 +11,10 @@ import TestRunner from './utils/TestRunner.js';
 const runner = new TestRunner();
 
 // --------------------------------------------------
-// TES STUDENTMANAGER - KONSTRUKTOR
+// TES STUDENT MANAGER - KONSTRUKTOR
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENTMANAGER - KONSTRUKTOR');
+console.log('TES STUDENT MANAGER - KONSTRUKTOR');
 console.log('='.repeat(50) + '\n');
 
 console.log('--- Kategori 1: Inisialisasi Manager ---\n');
@@ -55,10 +55,10 @@ runner.test('Array students bersifat read-only (frozen)', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENTMANAGER - METHOD addStudent
+// TES STUDENT MANAGER - METHOD addStudent
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENTMANAGER - METHOD addStudent');
+console.log('TES STUDENT MANAGER - METHOD addStudent');
 console.log('='.repeat(50) + '\n');
 
 console.log('\n--- Kategori 2: addStudent Operasi Valid ---\n');
@@ -190,7 +190,7 @@ runner.test('Gagal menambah siswa dengan ID hanya spasi', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENTMANAGER - METHOD removeStudent
+// TES STUDENT MANAGER - METHOD removeStudent
 // --------------------------------------------------
 runner.test('Hapus siswa yang ada', () => {
   const manager = new StudentManager();
@@ -242,7 +242,7 @@ runner.test('ID null saat hapus harus false', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENTMANAGER - METHOD findStudent
+// TES STUDENT MANAGER - METHOD findStudent
 // --------------------------------------------------
 runner.test('Cari siswa dengan ID yang ada', () => {
   const manager = new StudentManager();
@@ -303,10 +303,10 @@ runner.test('Cari siswa yang tepat saat banyak data', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENTMANAGER - METHOD updateStudent
+// TES STUDENT MANAGER - METHOD updateStudent
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENTMANAGER - METHOD updateStudent');
+console.log('TES STUDENT MANAGER - METHOD updateStudent');
 console.log('='.repeat(50) + '\n');
 
 runner.test('Ubah nama siswa', () => {
@@ -403,10 +403,10 @@ runner.test('Kelas kosong ditolak', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENTMANAGER - METHOD getAllStudents
+// TES STUDENT MANAGER - METHOD getAllStudents
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENTMANAGER - METHOD getAllStudents');
+console.log('TES STUDENT MANAGER - METHOD getAllStudents');
 console.log('='.repeat(50) + '\n');
 
 runner.test('Kembalikan array kosong saat belum ada siswa', () => {
@@ -449,10 +449,10 @@ runner.test('Ubah hasil tidak memengaruhi data asli', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENTMANAGER - METHOD getTopStudents
+// TES STUDENT MANAGER - METHOD getTopStudents
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENTMANAGER - METHOD getTopStudents');
+console.log('TES STUDENT MANAGER - METHOD getTopStudents');
 console.log('='.repeat(50) + '\n');
 
 runner.test('Kembalikan siswa dengan rata rata terbaik', () => {
@@ -560,10 +560,10 @@ runner.test('Urutan asli tidak berubah setelah sorting', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENTMANAGER - METHOD displayAllStudents
+// TES STUDENT MANAGER - METHOD displayAllStudents
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENTMANAGER - METHOD displayAllStudents');
+console.log('TES STUDENT MANAGER - METHOD displayAllStudents');
 console.log('='.repeat(50) + '\n');
 
 runner.test('Daftar kosong harus aman ditampilkan', () => {
@@ -587,10 +587,10 @@ runner.test('Tampil semua siswa tanpa error', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENTMANAGER - METHOD getStudentsByClass
+// TES STUDENT MANAGER - METHOD getStudentsByClass
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENTMANAGER - METHOD getStudentsByClass');
+console.log('TES STUDENT MANAGER - METHOD getStudentsByClass');
 console.log('='.repeat(50) + '\n');
 
 runner.test('Filter kelas tertentu', () => {
@@ -627,10 +627,10 @@ runner.test('Pencarian kelas tidak peka huruf besar', () => {
 });
 
 // --------------------------------------------------
-// TES STUDENTMANAGER - METHOD getClassStatistics
+// TES STUDENT MANAGER - METHOD getClassStatistics
 // --------------------------------------------------
 console.log('\n' + '='.repeat(50));
-console.log('TES STUDENTMANAGER - METHOD getClassStatistics');
+console.log('TES STUDENT MANAGER - METHOD getClassStatistics');
 console.log('='.repeat(50) + '\n');
 
 runner.test('Hitung statistik kelas', () => {
