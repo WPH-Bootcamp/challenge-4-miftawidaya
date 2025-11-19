@@ -153,7 +153,48 @@ class StudentManager {
    * TODO: Cari siswa dan update propertinya
    */
   updateStudent(id, data) {
-    // Implementasi method di sini
+    // Validation: Check parameters
+    if (!id || !data) {
+      return false;
+    }
+
+    // Find the student
+    const student = this.findStudent(id);
+
+    if (!student) {
+      // Student not found
+      return false;
+    }
+
+    // Update name if provided
+    if (Object.hasOwn(data, 'name')) {
+      const trimmedName = this.#normalizeText(data.name);
+
+      if (!trimmedName) {
+        // Don't allow empty name
+        throw new Error('Nama siswa tidak boleh kosong');
+      }
+
+      student.name = trimmedName;
+    }
+
+    // Update class if provided
+    if (Object.hasOwn(data, 'class')) {
+      const trimmedClass = this.#normalizeText(data.class);
+
+      if (!trimmedClass) {
+        // Don't allow empty class
+        throw new Error('Kelas siswa tidak boleh kosong');
+      }
+
+      student.class = trimmedClass;
+    }
+
+    // Note: ID and grades are not updated through this method
+    // - ID is immutable (business rule)
+    // - Grades should be updated through student.addGrade()
+
+    return true;
   }
 
   /**

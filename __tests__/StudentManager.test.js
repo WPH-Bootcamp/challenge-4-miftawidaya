@@ -302,4 +302,104 @@ runner.test('Cari siswa yang tepat saat banyak data', () => {
   runner.assertEqual(found.name, 'Ahmad', 'Nama harus Ahmad');
 });
 
+// --------------------------------------------------
+// TES STUDENTMANAGER - METHOD updateStudent
+// --------------------------------------------------
+console.log('\n' + '='.repeat(50));
+console.log('TES STUDENTMANAGER - METHOD updateStudent');
+console.log('='.repeat(50) + '\n');
+
+runner.test('Ubah nama siswa', () => {
+  const manager = new StudentManager();
+  const student = new Student('S001', 'Budi', '10A');
+  manager.addStudent(student);
+
+  const result = manager.updateStudent('S001', { name: 'Budi Santoso' });
+
+  runner.assertTrue(result, 'Update harus sukses');
+
+  const updated = manager.findStudent('S001');
+  runner.assertEqual(updated.name, 'Budi Santoso', 'Nama berubah');
+});
+
+runner.test('Ubah kelas siswa', () => {
+  const manager = new StudentManager();
+  const student = new Student('S001', 'Budi', '10A');
+  manager.addStudent(student);
+
+  const result = manager.updateStudent('S001', { class: '11A' });
+
+  runner.assertTrue(result, 'Update harus sukses');
+
+  const updated = manager.findStudent('S001');
+  runner.assertEqual(updated.class, '11A', 'Kelas berubah');
+});
+
+runner.test('Ubah nama dan kelas sekaligus', () => {
+  const manager = new StudentManager();
+  const student = new Student('S001', 'Budi', '10A');
+  manager.addStudent(student);
+
+  manager.updateStudent('S001', {
+    name: 'Budi Santoso',
+    class: '11A',
+  });
+
+  const updated = manager.findStudent('S001');
+  runner.assertEqual(updated.name, 'Budi Santoso');
+  runner.assertEqual(updated.class, '11A');
+});
+
+runner.test('Perbarui sebagian hanya nama', () => {
+  const manager = new StudentManager();
+  const student = new Student('S001', 'Budi', '10A');
+  manager.addStudent(student);
+
+  manager.updateStudent('S001', { name: 'Ahmad' });
+
+  const updated = manager.findStudent('S001');
+  runner.assertEqual(updated.name, 'Ahmad', 'Nama berubah');
+  runner.assertEqual(updated.class, '10A', 'Kelas tetap');
+});
+
+runner.test('ID tidak ada harus false', () => {
+  const manager = new StudentManager();
+
+  const result = manager.updateStudent('NONEXISTENT', { name: 'Test' });
+
+  runner.assertFalse(result, 'Harus false');
+});
+
+runner.test('Nama kosong ditolak', () => {
+  const manager = new StudentManager();
+  const student = new Student('S001', 'Budi', '10A');
+  manager.addStudent(student);
+
+  try {
+    manager.updateStudent('S001', { name: '' });
+    runner.assertTrue(false, 'Harus lempar error');
+  } catch (error) {
+    runner.assertTrue(
+      error.message.includes('kosong'),
+      'Pesan harus sebut kosong'
+    );
+  }
+});
+
+runner.test('Kelas kosong ditolak', () => {
+  const manager = new StudentManager();
+  const student = new Student('S001', 'Budi', '10A');
+  manager.addStudent(student);
+
+  try {
+    manager.updateStudent('S001', { class: '   ' });
+    runner.assertTrue(false, 'Harus lempar error');
+  } catch (error) {
+    runner.assertTrue(
+      error.message.includes('kosong'),
+      'Pesan harus sebut kosong'
+    );
+  }
+});
+
 runner.summary();
